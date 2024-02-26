@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.poscinema.pos_cinema.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<Pane maxHeight="610.0" maxWidth="470.0" minHeight="610.0" minWidth="470.0" prefHeight="610.0" prefWidth="470.0" style="-fx-background-color: #0D0D0D;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="249.0" fitWidth="464.0" layoutX="6.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../Images/rows-red-seats-theater.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#d9d9d9" height="111.0" layoutX="117.0" layoutY="69.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
+      <Label layoutX="158.0" layoutY="105.0" prefHeight="40.0" prefWidth="154.0" text="POS CINEMA " textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <style>
+            -fx-stroke: #730202;
+            -fx-stroke-width: 4px;
+         </style>
+      </Label>
+      <Line endX="468.0" endY="248.99998474121094" layoutY="-1.0" startY="249.0" stroke="#590202" strokeWidth="5.0" />
+      <Label layoutX="181.0" layoutY="265.0" prefHeight="40.0" prefWidth="94.0" text="Sign In" textAlignment="CENTER" textFill="#d9d9d9">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font></Label>
+      <Label layoutX="40.0" layoutY="312.0" prefHeight="30.0" prefWidth="49.0" style="-fx-font-weight: bold;" text="User" textFill="#d9d9d9">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="39.0" layoutY="342.0" prefHeight="40.0" prefWidth="377.0" style="-fx-background-radius: 10;" />
+      <Label layoutX="39.0" layoutY="401.0" prefHeight="30.0" prefWidth="94.0" style="-fx-font-weight: bold;" text="Password" textFill="#d9d9d9">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <PasswordField layoutX="39.0" layoutY="431.0" prefHeight="40.0" prefWidth="377.0" style="-fx-background-radius: 10;" />
+      <Button alignment="CENTER" layoutX="170.0" layoutY="504.0" mnemonicParsing="false" style="-fx-background-color: A60303; -fx-background-radius: 10;" text="Sign In" textAlignment="CENTER" textFill="#d9d9d9">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
