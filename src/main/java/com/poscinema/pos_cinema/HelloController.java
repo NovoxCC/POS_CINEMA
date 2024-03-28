@@ -24,45 +24,24 @@ public class HelloController{
         alert.showAndWait();
     }
     @FXML
-    void OnsignInButton(ActionEvent actionEvent) {
+    void OnsignInButton(ActionEvent actionEvent) throws SQLException {
         String user = usernameField.getText();
-        PythonEncryptor encryptor = new PythonEncryptor();
-        String p =  passwordField.getText();
-        String hp = encryptor.encryptPassword(user, p);
-        encryptor.close();
-        DatabaseConnection connectionNow = new DatabaseConnection();
-        try {
-            Connection connectDB = connectionNow.getConnection();
-            if (connectDB != null) {
-                System.out.println("Conexión establecida.");// para saber si inicia el boton
-                // Aquí  lógica de autenticación y navegación a otra escena
-                String query = "SELECT COUNT(*) FROM Users WHERE username = ? AND password_hash = ?";
-                PreparedStatement statement = connectDB.prepareStatement(query);
-                statement.setString(1, user);
-                statement.setString(2, hp);
-                ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    int count = resultSet.getInt(1);
-                    if (count == 1) {
-                        // Usuario autenticado,  navegar a otra escena aquí
-                        System.out.println("Usuario autenticado. Navegar a otra escena...");
-                    } else {
-                        // Usuario no autenticado, muestra un mensaje de error
-                        showErrorDialog("Error de autenticación", "Usuario y/o contraseña incorrectos.\n");
-                    }
-                }
-                // Cerrar la conexión
-                resultSet.close();
-                statement.close();
-                connectionNow.closeConnection();
-            } else {
-                // Mostrar ventana de error si no se pudo establecer la conexión
-                showErrorDialog("Error de conexión", "No se pudo establecer la conexión a la base de datos.");
-            }
-        } catch (SQLException e) {
-            // Mostrar ventana de error si ocurre una excepción SQL
-            showErrorDialog("Error de SQL", "Ocurrió un error al intentar conectarse a la base de datos:\n" + e.getMessage());
-            e.printStackTrace();
+        String password = passwordField.getText();
+
+        // Instanciar Encryptor para registrar y verificar usuarios
+        Encryptor encryptor = new Encryptor();
+        //encryptor.registrarusuario(user, password, 2);
+        // Verificar si el usuario y la contraseña coinciden
+        boolean isAuthenticated = encryptor.verificarPassword(user, password);
+
+        if (isAuthenticated) {
+            // Usuario autenticado, navegar a otra escena
+            System.out.println("Usuario autenticado. Navegar a otra escena...");
+        } else {
+            // Usuario no autenticado, mostrar un mensaje de error
+            showErrorDialog("Error de autenticación", "Usuario y/o contraseña incorrectos.");
         }
     }
+
+
 }
