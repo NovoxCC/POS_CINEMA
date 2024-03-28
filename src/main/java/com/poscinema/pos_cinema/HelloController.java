@@ -2,8 +2,14 @@ package com.poscinema.pos_cinema;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +30,7 @@ public class HelloController{
         alert.showAndWait();
     }
     @FXML
-    void OnsignInButton(ActionEvent actionEvent) throws SQLException {
+    void OnsignInButton(ActionEvent actionEvent) throws SQLException, IOException {
         String user = usernameField.getText();
         String password = passwordField.getText();
 
@@ -36,7 +42,17 @@ public class HelloController{
 
         if (isAuthenticated) {
             // Usuario autenticado, navegar a otra escena
-            System.out.println("Usuario autenticado. Navegar a otra escena...");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("startMenu-view.fxml"));
+            Parent root = loader.load();
+            // Crear una nueva escena con la vista cargada
+            Scene scene = new Scene(root);
+
+            // Obtener el escenario actual
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+
+            // Establecer la nueva escena en el escenario y mostrarla
+            stage.setScene(scene);
+            stage.show();
         } else {
             // Usuario no autenticado, mostrar un mensaje de error
             showErrorDialog("Error de autenticación", "Usuario y/o contraseña incorrectos.");
