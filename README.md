@@ -25,6 +25,7 @@ su dueño un descuento del 10% en sus boletas. De cada tarjeta se conoce:
 Cuando se adquiere una tarjeta, el cliente debe cargar la tarjeta con un valor inicial de $70,000. Cada
 tarjeta puede ser recargada una cantidad ilimitada de veces, sin embargo, cada recarga se debe hacer
 por un monto de $50,000.
+
 La aplicación debe permitir:
 1. Crear una nueva tarjeta.
 2. Recargar una tarjeta.
