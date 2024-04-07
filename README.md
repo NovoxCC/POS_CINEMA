@@ -36,7 +36,5 @@ La aplicación debe permitir:
 7. Visualizar las sillas del cine.
 8. Visualizar el dinero en caja.
 
-## Tecnologias que se usaron
-Se eligio usar  java con la api javaFX en maven  con una base de datos en mysql en local 
 
 Para mas detalles revisar el documento 
