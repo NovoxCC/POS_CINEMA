@@ -2,7 +2,6 @@
 systema POS para una sala de cine.
 
 ## Detalles del proyecto
-Proyecto # 11:
 Se quiere construir una aplicación que permita administrar una sala de cine. Esta aplicación permite
 hacer reservas y registrar sus pagos.
 La sala de cine tiene 220 sillas. De cada silla se conoce:
