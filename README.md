@@ -1,6 +1,7 @@
-# POS_CINEMA
-systema POS para una sala de cine 
+# # POS_CINEMA
+systema POS para una sala de cine.
 
+## Detalles del proyecto
 Proyecto # 11:
 Se quiere construir una aplicación que permita administrar una sala de cine. Esta aplicación permite
 hacer reservas y registrar sus pagos.
@@ -35,6 +36,7 @@ La aplicación debe permitir:
 7. Visualizar las sillas del cine.
 8. Visualizar el dinero en caja.
 
+## Tecnologias que se usaron
 Se eligio usar  java con la api javaFX en maven  con una base de datos en mysql en local 
 
 Para mas detalles revisar el documento 
