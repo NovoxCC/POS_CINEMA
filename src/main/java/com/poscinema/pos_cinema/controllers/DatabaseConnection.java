@@ -1,4 +1,4 @@
-package com.poscinema.pos_cinema;
+package com.poscinema.pos_cinema.controllers;
 
 import javafx.scene.control.Alert;
 import java.sql.Connection;

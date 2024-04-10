@@ -1,4 +1,4 @@
-package com.poscinema.pos_cinema;
+package com.poscinema.pos_cinema.controllers;
 
 public class DatabaseConfig {
     public static final String DATABASE_NAME = "pos_cinema";

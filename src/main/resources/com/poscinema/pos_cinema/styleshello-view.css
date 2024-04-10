@@ -1,0 +1,16 @@
+
+
+#signInButton {
+    -fx-background-color: #A60303;
+    -fx-background-radius: 10;
+    -fx-text-fill: #d9d9d9;
+    -fx-font-size: 1.5em;
+    -fx-alignment: center;
+
+}
+
+#signInButton:pressed {
+    -fx-background-color: #FF0303;
+}
+
+

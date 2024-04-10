@@ -1,4 +1,4 @@
-package com.poscinema.pos_cinema;
+package com.poscinema.pos_cinema.controllers;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 public class Encryptor {
-
-    public void registrarusuario(String user, String password, int roleid) throws SQLException {
+    //falta tener en cuenta a
+    public void registerUser(String user, String password, int roleid) throws SQLException {
         try {
             // Generar una sal aleatoria
             String salt = generateSalt(28);
@@ -43,7 +43,7 @@ public class Encryptor {
         }
     }
 
-    public boolean verificarPassword(String user, String password) {
+    public boolean verifyPassword(String user, String password) {
         String storedHash = null;
         String storedSalt = null;
         try {

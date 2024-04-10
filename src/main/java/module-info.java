@@ -10,4 +10,6 @@ module com.poscinema.pos_cinema {
 
     opens com.poscinema.pos_cinema to javafx.fxml;
     exports com.poscinema.pos_cinema;
+    exports com.poscinema.pos_cinema.controllers;
+    opens com.poscinema.pos_cinema.controllers to javafx.fxml;
 }
