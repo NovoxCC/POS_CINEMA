@@ -1,7 +1,7 @@
-# POS_CINEMA
-systema POS para una sala de cine 
+# # POS_CINEMA
+systema POS para una sala de cine.
 
-Proyecto # 11:
+## Detalles del proyecto
 Se quiere construir una aplicación que permita administrar una sala de cine. Esta aplicación permite
 hacer reservas y registrar sus pagos.
 La sala de cine tiene 220 sillas. De cada silla se conoce:
@@ -25,6 +25,7 @@ su dueño un descuento del 10% en sus boletas. De cada tarjeta se conoce:
 Cuando se adquiere una tarjeta, el cliente debe cargar la tarjeta con un valor inicial de $70,000. Cada
 tarjeta puede ser recargada una cantidad ilimitada de veces, sin embargo, cada recarga se debe hacer
 por un monto de $50,000.
+
 La aplicación debe permitir:
 1. Crear una nueva tarjeta.
 2. Recargar una tarjeta.
@@ -35,6 +36,5 @@ La aplicación debe permitir:
 7. Visualizar las sillas del cine.
 8. Visualizar el dinero en caja.
 
-Se eligio usar  java con la api javaFX en maven  con una base de datos en mysql en local 
 
 Para mas detalles revisar el documento 
