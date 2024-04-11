@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 
 public class Encryptor {
     //falta tener en cuenta a
-    public void registerUser(String user, String password, int roleid) throws SQLException {
+    public void registerUser(String user, String password, int roleid) {
         try {
             // Generar una sal aleatoria
             String salt = generateSalt(28);

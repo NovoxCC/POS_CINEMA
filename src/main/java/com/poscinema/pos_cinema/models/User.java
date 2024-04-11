@@ -4,7 +4,6 @@ import com.poscinema.pos_cinema.controllers.DatabaseConnection;
 import com.poscinema.pos_cinema.controllers.Encryptor;
 import javafx.scene.control.Alert;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +34,7 @@ public class User {
         this.roleId = roleId;
     }
 
-    public static boolean login(String username, String password) throws IOException {
+    public static boolean login(String username, String password) {
         // Instanciar Encryptor para registrar y/o verificar usuario
         Encryptor encryptor = new Encryptor();
         // Verificar si el usuario y la contraseña coinciden\
