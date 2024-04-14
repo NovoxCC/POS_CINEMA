@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.mainMenuControler">
-   <children>
-      <Label layoutX="239.0" layoutY="162.0" prefHeight="77.0" prefWidth="123.0" text="entro">
-         <font>
-            <Font size="47.0" />
-         </font></Label>
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.mainMenuController">
+   <top>
+      <ButtonBar prefHeight="50.0" prefWidth="150.0" translateX="5.0" translateY="5.0" translateZ="10.0" BorderPane.alignment="BOTTOM_LEFT">
+         <buttons>
+            <MenuButton fx:id="reservasButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" text="Reservations" textAlignment="CENTER" ButtonBar.buttonData="LEFT">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Create Reservation" />
+                  <MenuItem mnemonicParsing="false" text="Delete Reservation" />
+               </items>
+            </MenuButton>
+            <MenuButton fx:id="pagosButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" text="Payments" ButtonBar.buttonData="LEFT">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Pay in Cash" />
+                  <MenuItem mnemonicParsing="false" text="Pay with Card" />
+               </items>
+            </MenuButton>
+            <MenuButton fx:id="tarjetasButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" text="Cards" ButtonBar.buttonData="LEFT">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="New Card" />
+                  <MenuItem mnemonicParsing="false" text="Reload Card" />
+               </items>
+            </MenuButton>
+            <Button fx:id="verHorariosButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" text="View Schedules" ButtonBar.buttonData="LEFT"> </Button>
+            <Label fx:id="labelusername" alignment="CENTER_RIGHT" prefHeight="100" prefWidth="200" text="Label">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+            <ImageView disable="true" fitHeight="60.0" fitWidth="60.0" focusTraversable="true" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../../Images/pngwing.com.png" />
+            </ImageView>
+         </buttons>
+      </ButtonBar>
+   </top>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</BorderPane>

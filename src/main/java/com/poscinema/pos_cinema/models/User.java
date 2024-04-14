@@ -40,7 +40,6 @@ public class User {
         // Verificar si el usuario y la contraseña coinciden\
         boolean isverified = encryptor.verifyPassword(username, password);
         if(isverified){
-            System.out.println("verifico usuario true");
             return  true;
         }else{
             // Usuario no autenticado, mostrar un mensaje de error

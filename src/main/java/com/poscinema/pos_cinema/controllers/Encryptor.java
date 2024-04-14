@@ -52,7 +52,7 @@ public class Encryptor {
             Connection connectDB = connectionNow.getConnection();
 
             // Preparar la consulta SQL para obtener el hash y la sal asociados al usuario
-            String query = "SELECT password_hash, salt FROM Users WHERE username = ?";
+            String query = "SELECT password_hash, salt FROM Users WHERE BINARY username = ?";
             PreparedStatement statement = connectDB.prepareStatement(query);
             statement.setString(1, user);
 

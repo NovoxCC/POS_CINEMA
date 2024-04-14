@@ -11,9 +11,9 @@ import java.io.IOException;
 
 public class HelloController {
     @FXML
-    public TextField usernameField;
+    private TextField usernameField;
     @FXML
-    public TextField passwordField;
+    private TextField passwordField;
 
     @FXML
     void OnsignInButton() throws IOException {
@@ -21,19 +21,28 @@ public class HelloController {
         if(User.login(usernameField.getText(),passwordField.getText())){
             user.setUsername(usernameField.getText());
             user.setRoleId(User.getRoleId(user.getUsername()));
-            // Usuario autenticado, navegar a otra escena
+
+            // Cargar la nueva escena del menú principal
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/main-Menu-view.fxml"));
             Parent root = loader.load();
+
+            // Obtener el controlador de la nueva escena
+            mainMenuController mainMenuController = loader.getController();
+
+            // Pasar el objeto User al controlador del menú principal
+            mainMenuController.setUser(user);
+
             // Crear una nueva escena con la vista cargada
             Scene scene = new Scene(root);
+
             // Obtener el escenario actual
             Stage stage = (Stage) usernameField.getScene().getWindow();
+
             // Establecer la nueva escena en el escenario y mostrarla
             stage.setScene(scene);
             stage.show();
         }
-
-
     }
+
 
 }
