@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="mainBorderPane" style="-fx-background-color: #0D0D0D;" styleClass="main-pane" stylesheets="@styleshello-view.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.HelloController">
+<BorderPane fx:id="mainBorderPane" style="-fx-background-color: #0D0D0D;" styleClass="main-pane" stylesheets="@stylesheet-view.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.loginController">
    <center>
       <!-- Contenedor para los elementos centrales -->
       <VBox alignment="CENTER" spacing="10">
@@ -21,7 +21,6 @@
             <VBox.margin>
                <Insets bottom="10.0" top="10.0" />
             </VBox.margin></ImageView>
-         <!-- Etiqueta de título -->
          <Label fx:id="titleLabel" text="POS CINEMA " textAlignment="CENTER" textFill="#d9d9d9">
             <font>
                <Font name="System Bold" size="24.0" />
@@ -49,7 +48,10 @@
             </font>
          </Label>
          <!-- Campo de texto de usuario -->
-         <TextField fx:id="usernameField" maxWidth="-Infinity" prefHeight="40.0" prefWidth="390.0" style="-fx-background-radius: 10;" />
+         <TextField fx:id="usernameField" maxWidth="-Infinity" prefHeight="40.0" prefWidth="390.0" style="-fx-background-radius: 10;">
+            <font>
+               <Font size="18.0" />
+            </font></TextField>
          <!-- Etiqueta de contraseña -->
          <Label fx:id="passwordLabel" prefHeight="30.0" prefWidth="94.0" style="-fx-font-weight: bold;" text="Password" textFill="#d9d9d9">
             <font>
@@ -57,9 +59,12 @@
             </font>
          </Label>
          <!-- Campo de contraseña -->
-         <PasswordField fx:id="passwordField" maxWidth="-Infinity" prefHeight="40.0" prefWidth="386.0" style="-fx-background-radius: 10;" />
+         <PasswordField fx:id="passwordField" maxWidth="-Infinity" prefHeight="40.0" prefWidth="386.0" style="-fx-background-radius: 10;">
+            <font>
+               <Font size="18.0" />
+            </font></PasswordField>
          <!-- Botón de "Sign In" -->
-         <Button fx:id="signInButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnsignInButton" prefHeight="60.0" prefWidth="136.0" styleClass="sign-in-button" text="Sign In" textAlignment="CENTER" textFill="#d9d9d9">
+         <Button fx:id="signInButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnsignInButton" prefHeight="60.0" prefWidth="136.0" styleClass="button" text="Sign In" textAlignment="CENTER" textFill="#d9d9d9">
             <font>
                <Font name="System Bold" size="28.0" />
             </font>

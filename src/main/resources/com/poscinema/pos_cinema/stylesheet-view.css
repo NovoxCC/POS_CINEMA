@@ -1,0 +1,12 @@
+
+.button {
+    -fx-background-color: #A60303;
+        -fx-background-radius: 10;
+        -fx-font-size: 2em;
+        -fx-alignment: center;
+}
+
+.button:pressed {
+-fx-background-color: #FF0303;
+}
+

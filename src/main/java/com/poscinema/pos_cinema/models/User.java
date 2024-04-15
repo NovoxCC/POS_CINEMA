@@ -1,9 +1,19 @@
 package com.poscinema.pos_cinema.models;
 
+import com.poscinema.pos_cinema.HelloApplication;
 import com.poscinema.pos_cinema.controllers.DatabaseConnection;
 import com.poscinema.pos_cinema.controllers.Encryptor;
+import com.poscinema.pos_cinema.controllers.loginController;
+import com.poscinema.pos_cinema.controllers.mainMenuController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +50,6 @@ public class User {
         // Verificar si el usuario y la contraseña coinciden\
         boolean isverified = encryptor.verifyPassword(username, password);
         if(isverified){
-            System.out.println("verifico usuario true");
             return  true;
         }else{
             // Usuario no autenticado, mostrar un mensaje de error
@@ -48,6 +57,18 @@ public class User {
         }
         return false;
     }
+
+    public void singOff(Stage currentStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/poscinema/pos_cinema/login-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        // Establecer la nueva escena en la ventana actual y mostrarla
+        currentStage.setScene(scene);
+        currentStage.centerOnScreen();
+        currentStage.show();
+    }
+
 
     public  static  Integer getRoleId(String username) {
         Integer role = null;
