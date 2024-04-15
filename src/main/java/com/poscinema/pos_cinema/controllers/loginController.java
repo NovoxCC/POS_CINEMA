@@ -31,7 +31,6 @@ public class loginController {
 
             // Pasar el objeto User al controlador del menú principal
             mainMenuController.setUser(user);
-
             // Crear una nueva escena con la vista cargada
             Scene scene = new Scene(root);
 

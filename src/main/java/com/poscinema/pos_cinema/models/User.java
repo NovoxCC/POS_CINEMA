@@ -7,6 +7,7 @@ import com.poscinema.pos_cinema.controllers.loginController;
 import com.poscinema.pos_cinema.controllers.mainMenuController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -55,29 +56,6 @@ public class User {
             showErrorDialog("Error de autenticación", "Usuario y/o contraseña incorrectos.");
         }
         return false;
-    }
-
-    public static void singOut() throws IOException {
-        // Cargar la nueva escena del menú principal
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/poscinema/pos_cinema/login-view.fxml"));
-        Parent root = loader.load();
-
-        // Crear una nueva escena con la vista cargada
-        Scene scene = new Scene(root);
-
-        // Obtener cualquier nodo dentro del BorderPane
-        ButtonBar buttonBar = (ButtonBar) root.lookup("#buttonBar");
-
-        // Obtener el escenario actual desde el ButtonBar
-        Stage stage = (Stage) buttonBar.getScene().getWindow();
-
-        // Establecer la nueva escena en el escenario y mostrarla
-        stage.setScene(scene);
-
-        // Maximizar la ventana
-        stage.setMaximized(true);
-
-        stage.show();
     }
 
 
