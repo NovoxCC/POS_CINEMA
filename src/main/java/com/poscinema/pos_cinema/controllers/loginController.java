@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class HelloController {
+public class loginController {
     @FXML
     private TextField usernameField;
     @FXML
@@ -40,6 +40,10 @@ public class HelloController {
 
             // Establecer la nueva escena en el escenario y mostrarla
             stage.setScene(scene);
+
+            // Maximizar la ventana
+            stage.setMaximized(true);
+
             stage.show();
         }
     }

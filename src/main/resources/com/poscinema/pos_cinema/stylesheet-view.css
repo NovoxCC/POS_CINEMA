@@ -1,0 +1,23 @@
+
+
+#signInButton {
+    -fx-background-color: #A60303;
+    -fx-background-radius: 10;
+    -fx-text-fill: #d9d9d9;
+    -fx-font-size: 1.5em;
+    -fx-alignment: center;
+
+}
+
+#signInButton:pressed {
+    -fx-background-color: #FF0303;
+}
+
+.signoff-button {
+    -fx-background-image: url('../../../Images/signoffIcon.png');
+       -fx-background-size: contain; /* Ajusta el tamaño de la imagen para que quepa completamente dentro del botón */
+       -fx-background-repeat: no-repeat; /* Evita que la imagen se repita si es más pequeña que el botón */
+       -fx-background-position: center; /* Centra la imagen dentro del botón */
+
+}
+
