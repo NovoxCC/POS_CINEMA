@@ -3,12 +3,13 @@ package com.poscinema.pos_cinema.controllers;
 
 import com.poscinema.pos_cinema.models.User;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class mainMenuController {
     private User user;
@@ -27,10 +28,15 @@ public class mainMenuController {
             labelusername.setText(user.getUsername());
         }
     }
+
+
+
     @FXML
-    private void handleButtonClick(MouseEvent event) {
-        // Código para manejar el evento de clic
-        System.out.println("Botón clickeado");
+    private ButtonBar buttonBar;
+
+    @FXML
+    private void handleButtonClick(MouseEvent event) throws IOException {
+        User.singOut();
     }
 
 }

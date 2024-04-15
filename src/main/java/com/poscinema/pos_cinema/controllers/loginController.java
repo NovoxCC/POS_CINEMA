@@ -43,8 +43,10 @@ public class loginController {
 
             // Maximizar la ventana
             stage.setMaximized(true);
+            stage.setFullScreen(true);
 
             stage.show();
+
         }
     }
 
