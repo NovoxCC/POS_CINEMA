@@ -58,6 +58,17 @@ public class User {
         return false;
     }
 
+    public void singOff(Stage currentStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/poscinema/pos_cinema/login-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        // Establecer la nueva escena en la ventana actual y mostrarla
+        currentStage.setScene(scene);
+        currentStage.centerOnScreen();
+        currentStage.show();
+    }
+
 
     public  static  Integer getRoleId(String username) {
         Integer role = null;

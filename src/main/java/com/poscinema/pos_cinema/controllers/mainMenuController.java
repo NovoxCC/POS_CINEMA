@@ -33,33 +33,13 @@ public class mainMenuController {
             labelusername.setText(user.getUsername());
         }
     }
-
-
-
+    
     @FXML
     private ButtonBar buttonBar;
 
     @FXML
     public void OnsignOffButton(ActionEvent actionEvent) throws IOException {
-        // Cargar la nueva escena del menú principal
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/poscinema/pos_cinema/login-view.fxml"));
-        Parent root = loader.load();
-
-        // Crear una nueva escena con la vista cargada
-        Scene scene = new Scene(root);
-
-        // Obtener el BorderPane desde el FXML
-        BorderPane borderPane = (BorderPane) root;
-
-        // Obtener el escenario actual desde la ventana principal
-        Stage stage = (Stage) labelusername.getScene().getWindow();
-
-        // Establecer la nueva escena en el escenario y mostrarla
-        stage.setScene(scene);
-
-        stage.centerOnScreen();
-
-        stage.show();
+        user.singOff((Stage) labelusername.getScene().getWindow());
     }
 
 }
