@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<BorderPane fx:id="daySchedule" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="600.0" style="-fx-background-color: #0D0D0D;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="daySchedule" style="-fx-background-color: rgba(13, 13, 13, 0.5);" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView editable="false" mouseTransparent="true" maxHeight="Infinity" maxWidth="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="100.0" text="Title" />
-          <TableColumn prefWidth="200" text="Genres" />
-          <TableColumn prefWidth="125" text="Start time" />
-          <TableColumn prefWidth="125" text="End time" />
+          <TableColumn editable="false" prefWidth="100.0" sortType="DESCENDING" text="Title" />
+          <TableColumn editable="false" prefWidth="200" sortType="DESCENDING" text="Genres" />
+          <TableColumn editable="false" prefWidth="125" sortType="DESCENDING" text="Start time" />
+          <TableColumn editable="false" prefWidth="125" sortType="DESCENDING" text="End time" />
         </columns>
       </TableView>
    </center>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </BorderPane>

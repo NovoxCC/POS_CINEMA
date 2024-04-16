@@ -13,7 +13,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
 import java.io.IOException;
 import java.util.Objects;
 
