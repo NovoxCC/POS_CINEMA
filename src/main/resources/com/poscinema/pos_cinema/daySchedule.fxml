@@ -6,7 +6,7 @@
 
 <BorderPane fx:id="daySchedule" style="-fx-background-color: rgba(13, 13, 13, 0.5);" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <TableView editable="false" mouseTransparent="true" maxHeight="Infinity" maxWidth="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+      <TableView mouseTransparent="true" maxHeight="Infinity" maxWidth="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn editable="false" prefWidth="100.0" sortType="DESCENDING" text="Title" />
           <TableColumn editable="false" prefWidth="200" sortType="DESCENDING" text="Genres" />

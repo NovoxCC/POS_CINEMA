@@ -10,39 +10,6 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 public class Encryptor {
-    //falta tener en cuenta a
-    public void registerUser(String user, String password, int roleid) {
-        try {
-            // Generar una sal aleatoria
-            String salt = generateSalt(28);
-
-            // Encriptar la contraseña con la sal
-            String hash = encryptPassword(password, salt);
-
-            // Establecer la conexión a la base de datos
-            DatabaseConnection connectionNow = new DatabaseConnection();
-            Connection connectDB = connectionNow.getConnection();
-
-            // Preparar la consulta SQL para insertar el usuario en la base de datos
-            String query = "INSERT INTO Users (username, password_hash, salt, role_id) VALUES (?, ?, ?, ?)";
-            PreparedStatement statement = connectDB.prepareStatement(query);
-            statement.setString(1, user);
-            statement.setString(2, hash);
-            statement.setString(3, salt);
-            statement.setString(4, String.valueOf(roleid));
-
-            // Ejecutar la consulta de inserción
-            statement.executeUpdate();
-
-            // Cerrar la conexión y liberar los recursos
-            statement.close();
-            connectDB.close();
-        } catch (SQLException e) {
-            // Manejar cualquier excepción SQL que pueda ocurrir
-            e.printStackTrace();
-        }
-    }
-
     public boolean verifyPassword(String user, String password) {
         String storedHash = null;
         String storedSalt = null;
@@ -86,14 +53,14 @@ public class Encryptor {
         return false;
     }
 
-    private String encryptPassword(String password, String salt) {
+    public static String encryptPassword(String password, String salt) {
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         String hash = argon2.hash(10, 65536, 4, password + salt);
         System.out.println("encryptPassword hash " + hash);
         return hash;
     }
 
-    private static String generateSalt(int length) {
+    public static String generateSalt(int length) {
         // Generar una sal aleatoria utilizando SecureRandom
         SecureRandom random = new SecureRandom();
         byte[] saltBytes = new byte[length];

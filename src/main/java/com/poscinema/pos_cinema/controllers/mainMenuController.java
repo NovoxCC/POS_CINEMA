@@ -1,25 +1,20 @@
 package com.poscinema.pos_cinema.controllers;
 
 
-import com.poscinema.pos_cinema.HelloApplication;
 import com.poscinema.pos_cinema.models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
+
 import java.io.IOException;
-import java.util.Objects;
 
 public class mainMenuController {
     private User user;
+
 
     public void setUser(User user) {
         this.user = user;
