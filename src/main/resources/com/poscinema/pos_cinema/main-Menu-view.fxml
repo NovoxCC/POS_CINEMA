@@ -13,29 +13,29 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #0D0D0D;" stylesheets="@stylesheet-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.mainMenuController">
+<BorderPane fx:id="mainMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #0D0D0D;" stylesheets="@stylesheet-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.mainMenuController">
    <top>
       <ButtonBar fx:id="buttonBar" prefHeight="50.0" prefWidth="150.0" translateX="5.0" translateY="5.0" translateZ="10.0" BorderPane.alignment="BOTTOM_LEFT">
          <buttons>
-            <MenuButton fx:id="reservasButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" styleClass="button" text="Reservations" textAlignment="CENTER" textFill="#d9d9d9" ButtonBar.buttonData="LEFT">
+            <MenuButton fx:id="reservationsButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" styleClass="button" text="Reservations" textAlignment="CENTER" textFill="#d9d9d9" ButtonBar.buttonData="LEFT">
                <items>
                   <MenuItem mnemonicParsing="false" text="Create Reservation" />
                   <MenuItem mnemonicParsing="false" text="Delete Reservation" />
                </items>
             </MenuButton>
-            <MenuButton fx:id="pagosButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" styleClass="button" text="Payments" textFill="#d9d9d9" ButtonBar.buttonData="LEFT">
+            <MenuButton fx:id="paymentsButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" styleClass="button" text="Payments" textFill="#d9d9d9" ButtonBar.buttonData="LEFT">
                <items>
                   <MenuItem mnemonicParsing="false" text="Pay in Cash" />
                   <MenuItem mnemonicParsing="false" text="Pay with Card" />
                </items>
             </MenuButton>
-            <MenuButton fx:id="tarjetasButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" styleClass="button" text="Cards" textFill="#d9d9d9" ButtonBar.buttonData="LEFT">
+            <MenuButton fx:id="cardsButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" styleClass="button" text="Cards" textFill="#d9d9d9" ButtonBar.buttonData="LEFT">
                <items>
                   <MenuItem mnemonicParsing="false" text="New Card" />
                   <MenuItem mnemonicParsing="false" text="Reload Card" />
                </items>
             </MenuButton>
-            <Button fx:id="verHorariosButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" styleClass="button" text="View Schedules" textFill="#d9d9d9" ButtonBar.buttonData="LEFT"> </Button>
+            <Button fx:id="viewSchedulesButton" onAction="#OnviewSchedulesButton" mnemonicParsing="false" prefHeight="200" prefWidth="100" styleClass="button" text="View Schedules" textFill="#d9d9d9" ButtonBar.buttonData="LEFT"> </Button>
             <Label fx:id="labelusername" alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="200" text="username" textFill="#d9d9d9">
                <font>
                   <Font size="25.0" />

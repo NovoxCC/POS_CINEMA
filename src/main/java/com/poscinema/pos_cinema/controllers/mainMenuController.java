@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class mainMenuController {
     private User user;
@@ -42,5 +43,18 @@ public class mainMenuController {
         user.singOff((Stage) labelusername.getScene().getWindow());
     }
 
+    @FXML
+    private BorderPane mainMenu;
+
+    public void OnviewSchedulesButton(ActionEvent actionEvent) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/daySchedule.fxml"));
+            Parent centerContent = loader.load();
+            mainMenu.setCenter(centerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejo de errores
+        }
+    }
 }
 
