@@ -1,12 +1,20 @@
 
 .button {
     -fx-background-color: #A60303;
-        -fx-background-radius: 10;
-        -fx-font-size: 2em;
-        -fx-alignment: center;
+    -fx-background-radius: 10;
+    -fx-font-size: 2em;
+    -fx-alignment: center;
 }
 
 .button:pressed {
--fx-background-color: #FF0303;
+    -fx-background-color: #FF0303;
 }
+
+.daySchedule .cell{
+    -fx-wrap-text: true;
+    -fx-cell-size: 3em ;
+    -fx-font-size: 1.5em;
+ }
+
+
 

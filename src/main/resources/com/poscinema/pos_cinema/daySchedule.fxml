@@ -4,21 +4,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="daySchedule" style="-fx-background-color: rgba(13, 13, 13, 0.5);" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <TableView mouseTransparent="true" maxHeight="Infinity" maxWidth="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn editable="false" prefWidth="100.0" sortType="DESCENDING" text="Title" />
-          <TableColumn editable="false" prefWidth="200" sortType="DESCENDING" text="Genres" />
-          <TableColumn editable="false" prefWidth="125" sortType="DESCENDING" text="Start time" />
-          <TableColumn editable="false" prefWidth="125" sortType="DESCENDING" text="End time" />
-        </columns>
-      </TableView>
-   </center>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
+<BorderPane fx:id="daySchedule" style="-fx-background-color: rgba(13, 13, 13, 0.5);" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.DayScheduleController">
+    <center>
+            <TableView fx:id="dayScheduleTable"  styleClass="daySchedule" maxHeight="Infinity" maxWidth="-Infinity" minWidth="-Infinity" pickOnBounds="false" BorderPane.alignment="CENTER">
+                <columns>
+                    <TableColumn fx:id="titleColumn" editable="false" prefWidth="100.0" sortType="DESCENDING" text="Title" />
+                    <TableColumn fx:id="genreColumn" editable="false" prefWidth="200" sortType="DESCENDING" text="Genres" />
+                    <TableColumn fx:id="startTimeColumn" editable="false" prefWidth="125" sortType="DESCENDING" text="Start time" />
+                    <TableColumn fx:id="endTimeColumn" editable="false" prefWidth="125" sortType="DESCENDING" text="End time" />
+                </columns>
+            </TableView>
+    </center>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+   <left>
+   </left>
 </BorderPane>
