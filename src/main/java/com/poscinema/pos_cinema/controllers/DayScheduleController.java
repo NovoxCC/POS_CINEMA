@@ -41,7 +41,8 @@ public class DayScheduleController {
             String query = "SELECT m.title, m.genre, s.start_time, s.end_time " +
                     "FROM Movies m " +
                     "JOIN Schedules s ON m.id = s.movie_id " +
-                    "WHERE s.date = ?";
+                    "WHERE s.date = ? " +
+                    "ORDER BY s.start_time DESC";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, LocalDate.now().toString()); // Pasar la fecha actual como parámetro
             ResultSet resultSet = statement.executeQuery();
