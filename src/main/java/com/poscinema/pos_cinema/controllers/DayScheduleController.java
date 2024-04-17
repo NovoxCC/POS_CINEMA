@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalTime;
 import java.time.LocalDate;
 
 public class DayScheduleController {
@@ -42,7 +41,7 @@ public class DayScheduleController {
                     "FROM Movies m " +
                     "JOIN Schedules s ON m.id = s.movie_id " +
                     "WHERE s.date = ? " +
-                    "ORDER BY s.start_time DESC";
+                    "ORDER BY s.start_time ASC";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, LocalDate.now().toString()); // Pasar la fecha actual como parámetro
             ResultSet resultSet = statement.executeQuery();
