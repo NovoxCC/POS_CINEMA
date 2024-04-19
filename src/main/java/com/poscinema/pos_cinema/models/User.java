@@ -3,6 +3,8 @@ package com.poscinema.pos_cinema.models;
 import com.poscinema.pos_cinema.HelloApplication;
 import com.poscinema.pos_cinema.controllers.DatabaseConnection;
 import com.poscinema.pos_cinema.controllers.Encryptor;
+import com.poscinema.pos_cinema.controllers.loginController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,6 +15,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class User {
@@ -49,7 +53,10 @@ public class User {
             return  true;
         }else{
             // Usuario no autenticado, mostrar un mensaje de error
-            showErrorDialog("Error de autenticación", "Usuario y/o contraseña incorrectos.");
+            Platform.runLater(() -> {
+                showErrorDialog("Error de autenticación", "Usuario y/o contraseña incorrectos.");
+            });
+
         }
         return false;
     }
@@ -92,7 +99,7 @@ public class User {
             statement.close();
             connectDB.close();
         } catch (SQLException e) {
-            // Manejar cualquier excepción SQL que pueda ocurrir
+            // Manejar cualquier excepción SQL que pueda ocurrir mejorar cuando se implemente
             e.printStackTrace();
         }
     }
@@ -128,17 +135,20 @@ public class User {
             }
         } catch (SQLException e) {
             // Manejar cualquier excepción SQL que pueda ocurrir
-            e.printStackTrace();
+            Logger logger = Logger.getLogger(loginController.class.getName());
+            logger.log(Level.SEVERE, "Error al obtener el rol del usuario", e);
         }
         return role;
     }
 
     // funcion para mostrar mensaje de error
     public static void showErrorDialog(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
     }
 }
