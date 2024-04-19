@@ -12,15 +12,14 @@
       <!-- Contenedor para los elementos centrales -->
       <VBox alignment="CENTER" spacing="10">
          <ImageView fitHeight="154.0" fitWidth="308.0" preserveRatio="true">
-            <image>
-               <Image url="@../../../Images/rows-red-seats-theater.jpg" />
-            </image>
             <viewport>
-               <Rectangle2D minX="100.0" minY="100.0" width="100.0" />
+               <Rectangle2D minX="100.0" minY="100.0" width="100.0"/>
             </viewport>
             <VBox.margin>
-               <Insets bottom="10.0" top="10.0" />
-            </VBox.margin></ImageView>
+               <Insets bottom="10.0" top="10.0"/>
+            </VBox.margin>
+            <Image url="@../../../Images/rows-red-seats-theater.jpg"/>
+         </ImageView>
          <Label fx:id="titleLabel" text="POS CINEMA " textAlignment="CENTER" textFill="#d9d9d9">
             <font>
                <Font name="System Bold" size="24.0" />
@@ -36,7 +35,7 @@
                <Insets top="10.0" />
             </VBox.margin></Line>
          <!-- Etiqueta de "Sign In" -->
-         <Label fx:id="signInLabel" prefHeight="40.0" prefWidth="94.0" text="Sign In" textAlignment="CENTER" textFill="#d9d9d9">
+         <Label fx:id="signInLabel" prefHeight="40.0" prefWidth="94.0" text="Sign In" textAlignment="CENTER"  textFill="#d9d9d9">
             <font>
                <Font name="System Bold" size="28.0" />
             </font>

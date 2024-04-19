@@ -4,20 +4,20 @@ import com.poscinema.pos_cinema.HelloApplication;
 import com.poscinema.pos_cinema.controllers.DatabaseConnection;
 import com.poscinema.pos_cinema.controllers.Encryptor;
 import com.poscinema.pos_cinema.controllers.loginController;
-import com.poscinema.pos_cinema.controllers.mainMenuController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class User {
     private String username;
@@ -53,7 +53,10 @@ public class User {
             return  true;
         }else{
             // Usuario no autenticado, mostrar un mensaje de error
-            showErrorDialog("Error de autenticación", "Usuario y/o contraseña incorrectos.");
+            Platform.runLater(() -> {
+                showErrorDialog("Error de autenticación", "Usuario y/o contraseña incorrectos.");
+            });
+
         }
         return false;
     }
@@ -69,7 +72,37 @@ public class User {
         currentStage.show();
     }
 
+    public void registerUser(String user, String password, int roleid) {
+        try {
+            // Generar una sal aleatoria
+            String salt = Encryptor.generateSalt(28);
 
+            // Encriptar la contraseña con la sal
+            String hash = Encryptor.encryptPassword(password, salt);
+
+            // Establecer la conexión a la base de datos
+            DatabaseConnection connectionNow = new DatabaseConnection();
+            Connection connectDB = connectionNow.getConnection();
+
+            // Preparar la consulta SQL para insertar el usuario en la base de datos
+            String query = "INSERT INTO Users (username, password_hash, salt, role_id) VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connectDB.prepareStatement(query);
+            statement.setString(1, user);
+            statement.setString(2, hash);
+            statement.setString(3, salt);
+            statement.setString(4, String.valueOf(roleid));
+
+            // Ejecutar la consulta de inserción
+            statement.executeUpdate();
+
+            // Cerrar la conexión y liberar los recursos
+            statement.close();
+            connectDB.close();
+        } catch (SQLException e) {
+            // Manejar cualquier excepción SQL que pueda ocurrir mejorar cuando se implemente
+            e.printStackTrace();
+        }
+    }
     public  static  Integer getRoleId(String username) {
         Integer role = null;
         try {
@@ -102,17 +135,20 @@ public class User {
             }
         } catch (SQLException e) {
             // Manejar cualquier excepción SQL que pueda ocurrir
-            e.printStackTrace();
+            Logger logger = Logger.getLogger(loginController.class.getName());
+            logger.log(Level.SEVERE, "Error al obtener el rol del usuario", e);
         }
         return role;
     }
 
     // funcion para mostrar mensaje de error
     public static void showErrorDialog(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
     }
 }

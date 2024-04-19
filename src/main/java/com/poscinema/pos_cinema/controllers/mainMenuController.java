@@ -1,16 +1,12 @@
 package com.poscinema.pos_cinema.controllers;
 
 
-import com.poscinema.pos_cinema.HelloApplication;
 import com.poscinema.pos_cinema.models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -18,6 +14,7 @@ import java.io.IOException;
 
 public class mainMenuController {
     private User user;
+
 
     public void setUser(User user) {
         this.user = user;
@@ -42,5 +39,18 @@ public class mainMenuController {
         user.singOff((Stage) labelusername.getScene().getWindow());
     }
 
+    @FXML
+    private BorderPane mainMenu;
+
+    public void OnviewSchedulesButton(ActionEvent actionEvent) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/daySchedule.fxml"));
+            Parent centerContent = loader.load();
+            mainMenu.setCenter(centerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejo de errores
+        }
+    }
 }
 
