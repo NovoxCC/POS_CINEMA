@@ -7,6 +7,7 @@ module com.poscinema.pos_cinema {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires de.mkammerer.argon2.nolibs;
+    requires junit;
 
     opens com.poscinema.pos_cinema to javafx.fxml;
     exports com.poscinema.pos_cinema;
