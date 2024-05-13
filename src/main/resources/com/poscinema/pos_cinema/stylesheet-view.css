@@ -10,6 +10,16 @@
     -fx-background-color: #FF0303;
 }
 
+.buttonNumpad {
+     -fx-background-color: #d9d9d9;
+     -fx-background-radius: 0;
+
+}
+
+.buttonNumpad:pressed{
+ -fx-background-color:#ffffff;
+}
+
 .daySchedule .cell{
     -fx-wrap-text: true;
     -fx-cell-size: 3em ;

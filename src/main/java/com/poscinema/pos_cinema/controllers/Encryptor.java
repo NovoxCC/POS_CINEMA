@@ -76,4 +76,7 @@ public class Encryptor {
 
         return base64String;
     }
+
+    public static class PaymentCard {
+    }
 }

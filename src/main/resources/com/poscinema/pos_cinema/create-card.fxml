@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.CreateCardControler">
    <center>
       <GridPane prefHeight="349.0" prefWidth="552.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -41,7 +41,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-alignment: center;" styleClass="button" text="Create" textAlignment="CENTER" textFill="#d9d9d9" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OncreateButton" style="-fx-alignment: center;" styleClass="button" text="Create" textAlignment="CENTER" textFill="#d9d9d9" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="28.0" />
                </font>
