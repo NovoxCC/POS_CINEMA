@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,12 +20,12 @@ public class CreateCardControler {
     @FXML
     private TextField totalpayField;
 
-    private BorderPane mainMenu; // Referencia al BorderPane principal
 
-    // Método para establecer la referencia al BorderPane principal
-    public void setMainMenu(BorderPane mainMenu) {
-        this.mainMenu = mainMenu;
+    // Método para obtener el stage padre
+    private Stage getParentStage() {
+        return (Stage) idField.getScene().getWindow().getScene().getWindow();
     }
+
 
     public void OncreateButton(ActionEvent actionEvent) throws IOException{
 
@@ -52,6 +53,7 @@ public class CreateCardControler {
             } else {
                 // El TextField contiene caracteres que no son números
                 showErrorDialog("Invalid characters","Owner id can only contain numbers ");
+
             }
         } else {
             // El TextField está vacío
@@ -60,17 +62,20 @@ public class CreateCardControler {
     }
 
     // Función para mostrar mensaje de error
-    public static void showErrorDialog(String title, String message) {
+    public  void showErrorDialog(String title, String message) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(title);
             alert.setHeaderText(null);
             alert.setContentText(message);
 
-            // Configurar la ventana de alerta para que siempre esté encima
-            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-            alertStage.setAlwaysOnTop(true);
+            // Obtener el stage padre y establecerlo como propietario de la alerta
+            Stage parentStage = getParentStage();
+            alert.initOwner(parentStage);
+            alert.initModality(Modality.WINDOW_MODAL);
 
+
+            // Mostrar la alerta
             alert.showAndWait();
         });
     }

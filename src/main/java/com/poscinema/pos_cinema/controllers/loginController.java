@@ -44,8 +44,10 @@ public class loginController {
                     stage.setScene(scene);
 
                     // Maximizar la ventana
-                    stage.setMaximized(true);
 
+                    stage.setFullScreen(true);
+                    stage.setMaximized(true);
+                    stage.centerOnScreen();
                     stage.show();
 
                 }catch (IOException e){
