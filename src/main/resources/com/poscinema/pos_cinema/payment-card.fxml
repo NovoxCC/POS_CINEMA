@@ -7,111 +7,6 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.poscinema.pos_cinema.controllers.PaymentCardControler">
-   <right>
-      <GridPane alignment="CENTER" prefHeight="313.0" prefWidth="466.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" /> 
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="3.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="3.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="8" GridPane.columnIndex="1">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="3.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="2.0" top="3.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="4" GridPane.rowIndex="1">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="3.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="9" GridPane.columnIndex="2">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="3.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="3.0" />
-               </GridPane.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="7">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="115.0" styleClass="buttonNumpad" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.rowSpan="2">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-                     <image>
-                        <Image url="@../../../Images/icons8-retroceso-100.png" />
-                     </image></ImageView>
-               </graphic>
-               <GridPane.margin>
-                  <Insets left="2.0" />
-               </GridPane.margin>
-            </Button>
-         </children>
-         <padding>
-            <Insets bottom="5.0" />
-         </padding>
-      </GridPane>
-   </right>
    <top>
       <Label alignment="TOP_CENTER" text="Total Bill" textAlignment="CENTER" textFill="#d9d9d9" BorderPane.alignment="CENTER">
          <font>
@@ -197,8 +92,8 @@
          <children>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button mnemonicParsing="false" text="Cancel" translateX="400.0" ButtonBar.buttonData="LEFT" />
-                 <Button mnemonicParsing="false" text="Pay" translateX="-400.0" ButtonBar.buttonData="RIGHT" />
+                <Button mnemonicParsing="false" text="Cancel" textFill="#d9d9d9" translateX="400.0" ButtonBar.buttonData="LEFT" />
+                 <Button mnemonicParsing="false" text="Pay" textFill="#d9d9d9" translateX="-400.0" ButtonBar.buttonData="RIGHT" />
               </buttons>
                <StackPane.margin>
                   <Insets bottom="20.0" top="20.0" />
@@ -207,4 +102,126 @@
          </children>
       </StackPane>
    </bottom>
+   <right>
+      <StackPane prefHeight="273.0" prefWidth="443.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane alignment="CENTER" prefHeight="313.0" prefWidth="466.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" /> 
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="2.0" top="3.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="2.0" top="3.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="8" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="2.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets top="3.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="2.0" top="3.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="4" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="2.0" top="3.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="9" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets top="3.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="2.0" top="3.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="7">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="2.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="115.0" styleClass="buttonNumpad" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.rowSpan="2">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                           <image>
+                              <Image url="@../../../Images/icons8-retroceso-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <GridPane.margin>
+                        <Insets left="2.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </GridPane>
+         </children>
+         <BorderPane.margin>
+            <Insets right="20.0" />
+         </BorderPane.margin>
+      </StackPane>
+   </right>
 </BorderPane>
