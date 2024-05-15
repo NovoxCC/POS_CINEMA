@@ -28,7 +28,6 @@ public class CreateCardControler {
 
 
     public void OncreateButton(ActionEvent actionEvent) throws IOException{
-    System.out.println(cleanAndParseInt(totalpayField));
         // Verificar si el TextField no está vacío
         if (!idField.getText().isEmpty()) {
             // Verificar si el TextField contiene solo números
@@ -40,6 +39,11 @@ public class CreateCardControler {
                         // Cargar el nuevo formulario
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/payment-card.fxml"));
                         Parent centerContent = loader.load();
+
+                        // Obtener una referencia al controlador del formulario cargado
+                        PaymentCardControler controler = loader.getController();
+                        //pasar el valor del total a pagar al controlador
+                        controler.setTotal(cleanAndParseInt(totalpayField));
 
                         // Obtener el BorderPane padre desde el botón que activó el evento
                         Button button = (Button) actionEvent.getSource();

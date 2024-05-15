@@ -36,7 +36,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="totalpayField" editable="false" prefHeight="44.0" prefWidth="298.0" text="\$ 70.000 COP" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="totalpayField" editable="false" prefHeight="44.0" prefWidth="298.0" text="\$ 70000 COP" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>

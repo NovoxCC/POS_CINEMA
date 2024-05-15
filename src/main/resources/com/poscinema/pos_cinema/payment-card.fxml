@@ -36,14 +36,14 @@
                   <Insets left="20.0" />
                </padding>
             </Label>
-            <TextField editable="false" prefHeight="25.0" prefWidth="286.0" GridPane.columnIndex="1">
+            <TextField fx:id="totalTextField" editable="false" prefHeight="25.0" prefWidth="286.0" GridPane.columnIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
                <GridPane.margin>
                   <Insets left="30.0" />
                </GridPane.margin></TextField>
-            <TextField editable="false" prefHeight="25.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="changeTextField" editable="false" prefHeight="25.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
@@ -59,7 +59,7 @@
                   <Insets left="20.0" />
                </padding>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="cashTextField" prefHeight="25.0" prefWidth="286.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
@@ -118,7 +118,7 @@
                 <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="1" GridPane.rowIndex="2">
+                  <Button mnemonicParsing="false" onAction="#OnButton1" prefHeight="142.0" prefWidth="115.0" styleClass="buttonNumpad" text="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="30.0" />
                      </font>
