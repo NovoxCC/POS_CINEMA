@@ -1,12 +1,11 @@
 package com.poscinema.pos_cinema.controllers;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,59 +21,109 @@ public class PaymentCardControler implements Initializable {
 
     public void setTotal(int total){
         this.total = total ;
-        totalTextField.setText("$ " + String.valueOf(total) + " COP");
-        changeTextField.setText("$ " + String.valueOf(change) + " COP");
+        totalTextField.setText("$ " + total + " COP");
+        changeTextField.setText("$ " + change + " COP");
     }
 
     @FXML
     private TextField changeTextField;
 
-
     @FXML
     private TextField cashTextField;
+
+    @FXML
+    private Label cashOnHand;
 
     public int getCash(){
         cash = Integer.parseInt(cashTextField.getText());
         return cash;
     }
 
-    public void OnButton1(ActionEvent actionEvent) {
+    public void OnButton0() {
+        addToCashTextField("0");
+    }
+
+    public void OnButton1() {
+        addToCashTextField("1");
+    }
+
+    public void OnButton2() {
+        addToCashTextField("2");
+    }
+
+    public void OnButton3() {
+        addToCashTextField("3");
+    }
+
+    public void OnButton4() {
+        addToCashTextField("4");
+    }
+
+    public void OnButton5() {
+        addToCashTextField("5");
+    }
+
+    public void OnButton6() {
+        addToCashTextField("6");
+    }
+
+    public void OnButton7() {
+        addToCashTextField("7");
+    }
+
+    public void OnButton8() {
+        addToCashTextField("8");
+    }
+
+    public void OnButton9() {
+        addToCashTextField("9");
+    }
+
+    public void OnButtonBackspace() {
         String currentText = cashTextField.getText();
-        currentText += "1";
+        // Verificar si el texto actual tiene al menos un carácter
+        if (!currentText.isEmpty()) {
+            // Eliminar el último carácter del texto actual
+            String newText = currentText.substring(0, currentText.length() - 1);
+            // Establecer el nuevo texto en el campo de texto
+            cashTextField.setText(newText);
+        }
+    }
+
+    public void addToCashTextField (String number){
+        String currentText = cashTextField.getText();
+        currentText += number;
 
         cashTextField.setText(currentText);
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Agregar un ChangeListener al textProperty de cashTextField
-        cashTextField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                try {
-                    // Verificar si el nuevo valor está vacío
-                    if (newValue.isEmpty()) {
-                        changeTextField.setText("$ 0 COP");
-                        return;
-                    }
-
-                    // Obtener el nuevo valor de cash desde cashTextField
-                    int newCash = Integer.parseInt(newValue.replace("$ ", "").replace(" COP", ""));
-
-                    // Calcular el cambio
-                    int newChange = newCash - total;
-
-                    // Actualizar changeTextField con el nuevo cambio
-                    if(newCash >= total){
-                        changeTextField.setText("$ " + String.valueOf(newChange) + " COP");
-                    }else{
-                        changeTextField.setText("$ " + String.valueOf("0") + " COP");
-                    }
-                } catch (NumberFormatException e) {
-                    // Manejar excepción si el nuevo valor no es un número válido
-                    // Aquí puedes mostrar un mensaje de error o realizar otra acción según tus necesidades
-                   showErrorDialog("Invalid character", "Solo se permiten numeros");
+        cashTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            try {
+                // Verificar si el nuevo valor está vacío
+                if (newValue.isEmpty()) {
+                    changeTextField.setText("$ 0 COP");
+                    return;
                 }
+
+                // Obtener el nuevo valor de cash desde cashTextField
+                int newCash = Integer.parseInt(newValue.replace("$ ", "").replace(" COP", ""));
+
+                // Calcular el cambio
+                int newChange = newCash - total;
+
+                // Actualizar changeTextField con el nuevo cambio
+                if(newCash >= total){
+                    changeTextField.setText("$ " + newChange + " COP");
+                }else{
+                    changeTextField.setText("$ " + "0" + " COP");
+                }
+            } catch (NumberFormatException e) {
+                // Manejar excepción si el nuevo valor no es un número válido o esta vacio
+               showErrorDialog("Invalid character", "Solo se permiten numeros");
             }
         });
     }
@@ -103,4 +152,6 @@ public class PaymentCardControler implements Initializable {
             alert.showAndWait();
         });
     }
+
+
 }
