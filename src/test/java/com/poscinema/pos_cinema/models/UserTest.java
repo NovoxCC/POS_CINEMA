@@ -74,6 +74,19 @@ class UserTest {
     }
 
     @Test
+    public void testBalance() {
+        // Arrange
+        User user = new User();
+        int expectedBalance = 100; // Establece el balance esperado
+
+        // Act
+        user.setBalance(expectedBalance); // Establece el balance en el usuario
+
+        // Assert
+        assertEquals(expectedBalance, user.getBalance()); // Verifica que el balance sea el esperado
+    }
+
+    @Test
     public void testShowErrorDialog() {
         // No se puede probar directamente la función showErrorDialog, ya que crea una ventana de alerta que no se puede manipular desde un test unitario.
         // Pero podemos asumir que si no se lanza ninguna excepción, entonces la función está funcionando correctamente.
