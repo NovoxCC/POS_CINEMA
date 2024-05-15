@@ -28,7 +28,7 @@ public class CreateCardControler {
 
 
     public void OncreateButton(ActionEvent actionEvent) throws IOException{
-
+    System.out.println(cleanAndParseInt(totalpayField));
         // Verificar si el TextField no está vacío
         if (!idField.getText().isEmpty()) {
             // El TextField no está vacío
@@ -59,6 +59,13 @@ public class CreateCardControler {
             // El TextField está vacío
             showErrorDialog("Empty field", "owner id is empty");
         }
+    }
+    //funcion para limpiar el numero
+    public int cleanAndParseInt(TextField textField ){
+        String text = textField.getText();
+        text = text.replaceAll("\\D", "");
+        int number = Integer.parseInt(text);
+        return number;
     }
 
     // Función para mostrar mensaje de error
