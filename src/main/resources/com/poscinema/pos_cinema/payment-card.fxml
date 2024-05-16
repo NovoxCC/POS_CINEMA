@@ -93,7 +93,7 @@
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
                 <Button mnemonicParsing="false" text="Cancel" textFill="#d9d9d9" translateX="400.0" ButtonBar.buttonData="LEFT" />
-                 <Button mnemonicParsing="false" text="Pay" textFill="#d9d9d9" translateX="-400.0" ButtonBar.buttonData="RIGHT" />
+                 <Button mnemonicParsing="false" onAction="#OnButtonPay" text="Pay" textFill="#d9d9d9" translateX="-400.0" ButtonBar.buttonData="RIGHT" />
               </buttons>
                <StackPane.margin>
                   <Insets bottom="20.0" top="20.0" />

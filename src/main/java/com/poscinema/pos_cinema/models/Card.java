@@ -68,8 +68,8 @@ public class Card {
     private static String generateCardNumber(String prefix) {
         Random random = new Random();
         StringBuilder cardNumber = new StringBuilder(prefix);
-        // Agregar los dígitos restantes del número de tarjeta (13 dígitos aleatorios)
-        for (int i = 0; i < 13; i++) {
+        // Agregar los dígitos restantes del número de tarjeta (11 dígitos aleatorios)
+        for (int i = 0; i < 11; i++) {
             cardNumber.append(random.nextInt(10)); // Agregar un dígito aleatorio del 0 al 9
         }
         // Calcular la cifra de control y agregarla al número de tarjeta

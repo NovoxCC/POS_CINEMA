@@ -1,7 +1,8 @@
 package com.poscinema.pos_cinema.controllers;
 
+import com.poscinema.pos_cinema.models.Card;
+import com.poscinema.pos_cinema.models.User;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -9,20 +10,26 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class PaymentCardControler implements Initializable {
-    int total = 0, change = 0, cash = 0;
+    int total = 0, change = 0, cash = 0, id;
 
     @FXML
     private TextField totalTextField;
 
-    public void setTotal(int total){
+    public void setTotalAndCashOnHand(int total){
         this.total = total ;
         totalTextField.setText("$ " + total + " COP");
         changeTextField.setText("$ " + change + " COP");
+        cashOnHand.setText("Cash on hand: " + User.balance);
+    }
+    public void setId(int id){
+        this.id = id;
     }
 
     @FXML
@@ -34,10 +41,6 @@ public class PaymentCardControler implements Initializable {
     @FXML
     private Label cashOnHand;
 
-    public int getCash(){
-        cash = Integer.parseInt(cashTextField.getText());
-        return cash;
-    }
 
     public void OnButton0() {
         addToCashTextField("0");
@@ -90,13 +93,23 @@ public class PaymentCardControler implements Initializable {
         }
     }
 
-    public void addToCashTextField (String number){
+    public void OnButtonPay( ) {
+        if(cash  >= total){
+            makePayAndCreateCard(id, total);
+            cashOnHand.setText("Cash on hand:" + User.balance);
+            total = 0;
+
+        }else{
+            showErrorDialog("Invalid payment", "Payment must be total, not partial.");
+        }
+    }
+
+    private void addToCashTextField (String number){
         String currentText = cashTextField.getText();
         currentText += number;
 
         cashTextField.setText(currentText);
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -110,20 +123,19 @@ public class PaymentCardControler implements Initializable {
                 }
 
                 // Obtener el nuevo valor de cash desde cashTextField
-                int newCash = Integer.parseInt(newValue.replace("$ ", "").replace(" COP", ""));
-
-                // Calcular el cambio
-                int newChange = newCash - total;
+                cash = Integer.parseInt(newValue.replace("$ ", "").replace(" COP", ""));
 
                 // Actualizar changeTextField con el nuevo cambio
-                if(newCash >= total){
-                    changeTextField.setText("$ " + newChange + " COP");
+                if(cash >= total){
+                    // Calcular el cambio
+                    change = cash - total;
+                    changeTextField.setText("$ " + change + " COP");
                 }else{
                     changeTextField.setText("$ " + "0" + " COP");
                 }
             } catch (NumberFormatException e) {
                 // Manejar excepción si el nuevo valor no es un número válido o esta vacio
-               showErrorDialog("Invalid character", "Solo se permiten numeros");
+               showErrorDialog("Invalid character", "Only numbers are allowed");
             }
         });
     }
@@ -134,7 +146,7 @@ public class PaymentCardControler implements Initializable {
     }
 
     // Función para mostrar mensaje de error
-    public  void showErrorDialog(String title, String message) {
+    private  void showErrorDialog(String title, String message) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(title);
@@ -153,5 +165,53 @@ public class PaymentCardControler implements Initializable {
         });
     }
 
+    private void makePayAndCreateCard(int id, int total) {
+        try {
+            Card card = Card.createCard(String.valueOf(id), total);
+            // Obtener conexión a la base de datos
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
 
+            // Preparar la consulta SQL para insertar el usuario en la base de datos
+            String query = "INSERT INTO Cards (card_number, cvv,  owner_id , balance) VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, card.getCardNumber());
+            statement.setString(2, card.getCvv());
+            statement.setString(3, card.getOwnerId());
+            statement.setString(4, String.valueOf(card.getBalance()));
+
+            // Ejecutar la consulta de inserción
+            statement.executeUpdate();
+
+            // Cerrar la conexión y liberar los recursos
+            statement.close();
+            connection.close();
+
+            // Mostrar una alerta de pago exitoso
+            User.balance += total;
+            showPaymentSuccessAlert();
+
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL que pueda ocurrir
+            showErrorDialog("Error", "Failed to make payment  ");
+        }
+    }
+
+    private   void showPaymentSuccessAlert() {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Payment Successful");
+            alert.setHeaderText(null);
+            alert.setContentText("Payment has been successfully processed.");
+
+            // Obtener el stage padre y establecerlo como propietario de la alerta esto permite
+            // dar el mensaje sin que se pierda el foco y cambie de ventana
+            Stage parentStage = getParentStage();
+            alert.initOwner(parentStage);
+            alert.initModality(Modality.WINDOW_MODAL);
+
+            // Mostrar la alerta
+            alert.showAndWait();
+        });
+    }
 }
