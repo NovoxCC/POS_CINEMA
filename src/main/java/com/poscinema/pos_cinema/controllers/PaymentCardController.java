@@ -3,20 +3,27 @@ package com.poscinema.pos_cinema.controllers;
 import com.poscinema.pos_cinema.models.Card;
 import com.poscinema.pos_cinema.models.User;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ResourceBundle;
 
-public class PaymentCardControler implements Initializable {
+public class PaymentCardController implements Initializable {
     int total = 0, change = 0, cash = 0, id;
 
     @FXML
@@ -26,7 +33,7 @@ public class PaymentCardControler implements Initializable {
         this.total = total ;
         totalTextField.setText("$ " + total + " COP");
         changeTextField.setText("$ " + change + " COP");
-        cashOnHand.setText("Cash on hand: " + User.balance);
+        cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
     }
     public void setId(int id){
         this.id = id;
@@ -93,14 +100,37 @@ public class PaymentCardControler implements Initializable {
         }
     }
 
+    @FXML
+    private BorderPane totalBillMenu;
+
     public void OnButtonPay( ) {
-        if(cash  >= total){
+        if (cash >= total) {
             makePayAndCreateCard(id, total);
-            cashOnHand.setText("Cash on hand:" + User.balance);
+            cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
             total = 0;
+
+            totalBillMenu.setVisible(false);
 
         }else{
             showErrorDialog("Invalid payment", "Payment must be total, not partial.");
+        }
+    }
+
+    public void OnButtonCancel(ActionEvent actionEvent) {
+        try {
+            // Cargar el nuevo formulario
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/create-card.fxml"));
+            Parent centerContent = loader.load();
+
+            // Obtener el BorderPane padre desde el botón que activó el evento
+            Button button = (Button) actionEvent.getSource();
+            BorderPane parentBorderPane = (BorderPane) button.getScene().getRoot();
+
+            // Establecer el nuevo contenido en el centro del BorderPane padre
+            parentBorderPane.setCenter(centerContent);
+        }catch (IOException e){
+            // Error al cargar la vista
+            showErrorDialog("Error loading view", "The view could not be loaded");
         }
     }
 
@@ -214,4 +244,6 @@ public class PaymentCardControler implements Initializable {
             alert.showAndWait();
         });
     }
+
+
 }

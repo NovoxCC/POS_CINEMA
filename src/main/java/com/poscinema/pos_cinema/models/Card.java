@@ -1,12 +1,10 @@
 package com.poscinema.pos_cinema.models;
 
 import java.util.Random;
-import java.util.regex.Pattern;
 
-import java.util.Random;
 
 public class Card {
-    private String cardNumber;
+    private final String cardNumber;
     private String cvv;
     private String ownerId;
     private int balance;

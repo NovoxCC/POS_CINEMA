@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,47 +29,45 @@ public class CreateCardControler {
         return (Stage) idField.getScene().getWindow().getScene().getWindow();
     }
 
-
     public void OncreateButton(ActionEvent actionEvent) {
         // Verificar si el TextField no está vacío
         if (!idField.getText().isEmpty()) {
             // Verificar si el TextField contiene solo números
             if (idField.getText().matches("\\d+")) {
                 //verificar si el TextField contiene un id con la longitud valida
-                if (idField.getText().length() > 8 ){
-                    // El TextField contiene solo números
-                    try {
-                        if(verifyid(Integer.parseInt(idField.getText()))){
-                            // Cargar el nuevo formulario
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/payment-card.fxml"));
-                            Parent centerContent = loader.load();
+                if (idField.getText().length() > 8 && idField.getText().length() <= 10){
+                        // El TextField contiene solo números
+                        try {
+                            if(verifyid(Long.parseLong(idField.getText()))){
+                                // Cargar el nuevo formulario
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/payment-card.fxml"));
+                                Parent centerContent = loader.load();
 
-                            // Obtener una referencia al controlador del formulario cargado
-                            PaymentCardControler controler = loader.getController();
-                            //pasar el valor del total a pagar al controlador
-                            controler.setTotalAndCashOnHand(cleanAndParseInt(totalpayField));
-                            controler.setId(Integer.parseInt(idField.getText()));
+                                // Obtener una referencia al controlador del formulario cargado
+                                PaymentCardController controler = loader.getController();
+                                //pasar el valor del total a pagar al controlador
+                                controler.setTotalAndCashOnHand(cleanAndParseInt(totalpayField));
+                                controler.setId(Integer.parseInt(idField.getText()));
 
-                            // Obtener el BorderPane padre desde el botón que activó el evento
-                            Button button = (Button) actionEvent.getSource();
-                            BorderPane parentBorderPane = (BorderPane) button.getScene().getRoot();
+                                // Obtener el BorderPane padre desde el botón que activó el evento
+                                Button button = (Button) actionEvent.getSource();
+                                BorderPane parentBorderPane = (BorderPane) button.getScene().getRoot();
 
-                            // Establecer el nuevo contenido en el centro del BorderPane padre
-                            parentBorderPane.setCenter(centerContent);
+                                // Establecer el nuevo contenido en el centro del BorderPane padre
+                                parentBorderPane.setCenter(centerContent);
+                            }
+
+                        } catch (IOException e) {
+                            // Error al cargar la vista
+                            showErrorDialog("Error loading view", "The view could not be loaded");
                         }
-
-                    } catch (IOException e) {
-                        // Error al cargar la vista
-                        showErrorDialog("Error loading view", "The view could not be loaded");
-                    }
                 }else{
                     // El TextField no contiene la catidad minima de numeros (6)
-                    showErrorDialog("Invalid id","The id isn't valid \n Is too short");
+                    showErrorDialog("Invalid id","The id isn't valid \n  It must be between 8 to 10 characters");
                 }
             } else {
                 // El TextField contiene caracteres que no son números
                 showErrorDialog("Invalid characters","Owner id can only contain numbers ");
-
             }
         } else {
             // El TextField está vacío
@@ -84,7 +81,7 @@ public class CreateCardControler {
         return Integer.parseInt(text);
     }
 
-    private boolean verifyid(int id) {
+    private boolean verifyid(long id) {
         try {
             // Obtener conexión a la base de datos
             ResultSet resultSet = getResultSet(id);
@@ -105,14 +102,14 @@ public class CreateCardControler {
         }
     }
 
-    private static ResultSet getResultSet(int id) throws SQLException {
+    private static ResultSet getResultSet(long id) throws SQLException {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
 
         // Preparar la consulta SQL para buscar el id en la base de datos
         String query = "SELECT owner_id FROM Cards WHERE owner_id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, id);
+        statement.setLong(1, id);
 
         // Ejecutar la consulta de selección
         return statement.executeQuery();
