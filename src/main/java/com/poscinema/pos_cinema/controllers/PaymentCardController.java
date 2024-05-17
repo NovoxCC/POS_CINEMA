@@ -15,16 +15,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.net.URL;
-import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class PaymentCardController implements Initializable {
-    int total = 0, change = 0, cash = 0, id;
+    int total = 0, change = 0, cash = 0, id , amount = 0;
+    //usan logica para pago que diferencia el tipo de transaccion
+    boolean createCard = false, rechargeCard = false ;
 
     @FXML
     private TextField totalTextField;
@@ -35,10 +33,27 @@ public class PaymentCardController implements Initializable {
         changeTextField.setText("$ " + change + " COP");
         cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
     }
+
     public void setId(int id){
         this.id = id;
     }
 
+    public void setCreateCardBill(){
+        this.createCard = true;
+    }
+
+    public void setRechargeCardBill(){
+        this.rechargeCard = true;
+    }
+
+    // Métodos auxiliares para obtener inputs (debes implementarlos según tu UI)
+    public void setCardNumberInput(int setCardNumber) {
+        this.id = setCardNumber;
+    }
+
+    public void setRechargeAmountInput(int setAmount) {
+        this.amount = setAmount;
+    }
     @FXML
     private TextField changeTextField;
 
@@ -103,16 +118,43 @@ public class PaymentCardController implements Initializable {
     @FXML
     private BorderPane totalBillMenu;
 
-    public void OnButtonPay( ) {
-        if (cash >= total) {
-            makePayAndCreateCard(id, total);
-            cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
-            total = 0;
+    public void OnButtonPay() {
+        if (createCard) {
+            if (cash >= total) {
+                try {
+                    // Crear una nueva tarjeta y guardarla en la base de datos
+                    Card card = Card.createCard(String.valueOf(id), total);
+                    card.saveCardToDatabase();
 
-            totalBillMenu.setVisible(false);
 
-        }else{
-            showErrorDialog("Invalid payment", "Payment must be total, not partial.");
+                    // Actualizar el balance del usuario y la interfaz gráfica
+                    User.balance += total;
+                    cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
+                    total = 0;
+                    showPaymentSuccessAlert();
+                    totalBillMenu.setVisible(false);
+                } catch (Exception e) {
+                    showErrorDialog("Error", "Failed to create and charge the card: " + e.getMessage());
+                }
+            } else {
+                showErrorDialog("Invalid payment", "Payment must be total, not partial.");
+            }
+        } else if (rechargeCard) {
+            // Implementar lógica de recargar la tarjeta
+            String cardNumber = String.valueOf(id); // Obtener el número de tarjeta de algún input de la UI
+            int toCharge = amount; // Obtener el monto de recarga de algún input de la UI
+
+            try {
+                Card.reloadCard(cardNumber, toCharge);
+
+                // Actualizar el balance del usuario y la interfaz gráfica si es necesario
+                User.balance += amount;
+                cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
+            } catch (Exception e) {
+                showErrorDialog("Error", "Failed to reload the card: " + e.getMessage());
+            }
+        } else {
+            showErrorDialog("Error", "Error assigning transaction type");
         }
     }
 
@@ -193,38 +235,6 @@ public class PaymentCardController implements Initializable {
             // Mostrar la alerta
             alert.showAndWait();
         });
-    }
-
-    private void makePayAndCreateCard(int id, int total) {
-        try {
-            Card card = Card.createCard(String.valueOf(id), total);
-            // Obtener conexión a la base de datos
-            DatabaseConnection databaseConnection = new DatabaseConnection();
-            Connection connection = databaseConnection.getConnection();
-
-            // Preparar la consulta SQL para insertar el usuario en la base de datos
-            String query = "INSERT INTO Cards (card_number, cvv,  owner_id , balance) VALUES (?, ?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, card.getCardNumber());
-            statement.setString(2, card.getCvv());
-            statement.setString(3, card.getOwnerId());
-            statement.setString(4, String.valueOf(card.getBalance()));
-
-            // Ejecutar la consulta de inserción
-            statement.executeUpdate();
-
-            // Cerrar la conexión y liberar los recursos
-            statement.close();
-            connection.close();
-
-            // Mostrar una alerta de pago exitoso
-            User.balance += total;
-            showPaymentSuccessAlert();
-
-        } catch (SQLException e) {
-            // Manejar cualquier excepción de SQL que pueda ocurrir
-            showErrorDialog("Error", "Failed to make payment  ");
-        }
     }
 
     private   void showPaymentSuccessAlert() {

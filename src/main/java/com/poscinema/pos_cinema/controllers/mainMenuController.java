@@ -44,7 +44,7 @@ public class mainMenuController {
 
     public void OnviewSchedulesButton(ActionEvent actionEvent) throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/daySchedule.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/day-schedule.fxml"));
             Parent centerContent = loader.load();
             mainMenu.setCenter(centerContent);
         } catch (IOException e) {

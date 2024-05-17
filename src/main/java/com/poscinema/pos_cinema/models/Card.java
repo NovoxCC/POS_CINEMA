@@ -1,7 +1,13 @@
 package com.poscinema.pos_cinema.models;
 
+import com.poscinema.pos_cinema.controllers.DatabaseConnection;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
-
 
 public class Card {
     private final String cardNumber;
@@ -10,15 +16,14 @@ public class Card {
     private int balance;
 
     // Constructor
-    public Card(String cardNumber, String cvv, String ownerId, int balance) {
-        this.cardNumber = cardNumber;
-        this.cvv = cvv;
-        this.ownerId = ownerId;
-        this.balance = balance;
+    public Card(String ownerId, int balance) {
+        this.cardNumber = generateUniqueCardNumber("1234"); // Cambia el prefijo personalizado si es necesario
+        this.setCvv(generateRandomCVV());
+        this.setOwnerId(ownerId);
+        this.setBalance(balance);
     }
 
     // Getters y Setters
-
     public String getCardNumber() {
         return cardNumber;
     }
@@ -51,29 +56,53 @@ public class Card {
 
     // Método para crear una tarjeta con generación aleatoria de CVV
     public static Card createCard(String ownerId, int balance) {
-        // Generar un número de tarjeta con un prefijo personalizado
-        String customPrefix = "1234"; // Cambia este valor segun el prefijo personalizado
-        String cardNumber = generateCardNumber(customPrefix);
+        return new Card(ownerId, balance);
+    }
 
-        // Generar un CVV aleatorio de 3 dígitos
-        String cvv = generateRandomCVV();
-
-        // Crear y devolver una nueva instancia de Card
-        return new Card( cardNumber, cvv, ownerId, balance);
+    // Método para generar un número de tarjeta único
+    private static String generateUniqueCardNumber(String prefix) {
+        String cardNumber;
+        do {
+            cardNumber = generateCardNumber(prefix);
+        } while (isCardNumberInDatabase(cardNumber));
+        return cardNumber;
     }
 
     // Método para generar un número de tarjeta aleatorio con un prefijo personalizado
     private static String generateCardNumber(String prefix) {
         Random random = new Random();
         StringBuilder cardNumber = new StringBuilder(prefix);
-        // Agregar los dígitos restantes del número de tarjeta (11 dígitos aleatorios)
         for (int i = 0; i < 11; i++) {
             cardNumber.append(random.nextInt(10)); // Agregar un dígito aleatorio del 0 al 9
         }
-        // Calcular la cifra de control y agregarla al número de tarjeta
         String controlDigit = calculateControlDigit(cardNumber.toString());
         cardNumber.append(controlDigit);
         return cardNumber.toString();
+    }
+
+    // Método para verificar si un número de tarjeta ya existe en la base de datos
+    private static boolean isCardNumberInDatabase(String cardNumber) {
+        boolean exists = false;
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+
+            String query = "SELECT COUNT(*) FROM Cards WHERE card_number = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, cardNumber);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next() && resultSet.getInt(1) > 0) {
+                exists = true;
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            showErrorDialog("Error", "Failed to check card number in database");
+        }
+        return exists;
     }
 
     // Método para generar un CVV aleatorio de 3 dígitos
@@ -102,5 +131,79 @@ public class Card {
         return String.valueOf(controlDigit);
     }
 
+    // Método para guardar una tarjeta en la base de datos
+    public void saveCardToDatabase() {
+        try {
+            // Obtener conexión a la base de datos
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
 
+            // Preparar la consulta SQL para insertar la tarjeta en la base de datos
+            String query = "INSERT INTO Cards (card_number, cvv, owner_id, balance) VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, this.getCardNumber());
+            statement.setString(2, this.getCvv());
+            statement.setString(3, this.getOwnerId());
+            statement.setInt(4, this.getBalance());
+
+            // Ejecutar la consulta de inserción
+            statement.executeUpdate();
+
+            // Cerrar la conexión y liberar los recursos
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL que pueda ocurrir
+            showErrorDialog("Error", "Failed to save card to database");
+        }
+    }
+
+    // Método para recargar una tarjeta existente
+    public static void reloadCard(String cardNumber, int amount) {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+
+            // Preparar la consulta SQL para actualizar el saldo de la tarjeta
+            String query = "UPDATE Cards SET balance = balance + ? WHERE card_number = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, amount);
+            statement.setString(2, cardNumber);
+
+            // Ejecutar la consulta de actualización
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Mostrar una alerta de recarga exitosa
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Recarga Exitosa");
+                    alert.setHeaderText(null);
+                    alert.setContentText("La tarjeta ha sido recargada exitosamente.");
+                    alert.showAndWait();
+                });
+            } else {
+                // Mostrar una alerta de tarjeta no encontrada
+                showErrorDialog("Error", "La tarjeta no fue encontrada.");
+            }
+
+            // Cerrar la conexión y liberar los recursos
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            // Manejar cualquier excepción de SQL que pueda ocurrir
+            showErrorDialog("Error", "Failed to reload card");
+        }
+    }
+
+    // Función para mostrar mensaje de error
+    public static void showErrorDialog(String title, String message) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+    }
 }

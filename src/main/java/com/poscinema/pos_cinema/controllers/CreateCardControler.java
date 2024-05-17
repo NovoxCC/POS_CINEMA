@@ -48,6 +48,7 @@ public class CreateCardControler {
                                 //pasar el valor del total a pagar al controlador
                                 controler.setTotalAndCashOnHand(cleanAndParseInt(totalpayField));
                                 controler.setId(Integer.parseInt(idField.getText()));
+                                controler.setCreateCardBill();
 
                                 // Obtener el BorderPane padre desde el botón que activó el evento
                                 Button button = (Button) actionEvent.getSource();
