@@ -41,7 +41,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OncreateButton" prefHeight="58.0" prefWidth="118.0" style="-fx-alignment: center;" styleClass="button" text="Pay" textAlignment="CENTER" textFill="#d9d9d9" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnPayButton" prefHeight="58.0" prefWidth="118.0" style="-fx-alignment: center;" styleClass="button" text="Pay" textAlignment="CENTER" textFill="#d9d9d9" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="28.0" />
                </font>

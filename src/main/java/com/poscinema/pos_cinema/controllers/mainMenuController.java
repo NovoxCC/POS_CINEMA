@@ -64,5 +64,16 @@ public class mainMenuController {
             // Manejo de errores
         }
     }
+
+    public void Onrechargecard(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/recharge-card.fxml"));
+            Parent centerContent = loader.load();
+            mainMenu.setCenter(centerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejo de errores
+        }
+    }
 }
 

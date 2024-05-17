@@ -29,7 +29,7 @@ public class CreateCardControler {
         return (Stage) idField.getScene().getWindow().getScene().getWindow();
     }
 
-    public void OncreateButton(ActionEvent actionEvent) {
+    public void OnPayButton(ActionEvent actionEvent) {
         // Verificar si el TextField no está vacío
         if (!idField.getText().isEmpty()) {
             // Verificar si el TextField contiene solo números
