@@ -80,8 +80,33 @@ public class Card {
         return cardNumber.toString();
     }
 
+    // Método para verificar si un CVV ya existe en la base de datos para un número de tarjeta específico
+    public static boolean isCvvValidForCard(String cardNumber, String cvv) {
+        boolean exists = false;
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+
+            String query = "SELECT COUNT(*) FROM Cards WHERE card_number = ? AND cvv = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, cardNumber);
+            statement.setString(2, cvv);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next() && resultSet.getInt(1) > 0) {
+                exists = true;
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            showErrorDialog("Error", "Failed to check CVV in database");
+        }
+        return exists;
+    }
     // Método para verificar si un número de tarjeta ya existe en la base de datos
-    private static boolean isCardNumberInDatabase(String cardNumber) {
+    public static boolean isCardNumberInDatabase(String cardNumber) {
         boolean exists = false;
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -159,7 +184,8 @@ public class Card {
     }
 
     // Método para recargar una tarjeta existente
-    public static void reloadCard(String cardNumber, int amount) {
+    public static boolean reloadCard(String cardNumber, int amount) {
+        boolean success = false;
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
@@ -174,26 +200,16 @@ public class Card {
             int rowsAffected = statement.executeUpdate();
 
             if (rowsAffected > 0) {
-                // Mostrar una alerta de recarga exitosa
-                Platform.runLater(() -> {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Recarga Exitosa");
-                    alert.setHeaderText(null);
-                    alert.setContentText("La tarjeta ha sido recargada exitosamente.");
-                    alert.showAndWait();
-                });
-            } else {
-                // Mostrar una alerta de tarjeta no encontrada
-                showErrorDialog("Error", "La tarjeta no fue encontrada.");
+                success = true;
             }
 
             // Cerrar la conexión y liberar los recursos
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            // Manejar cualquier excepción de SQL que pueda ocurrir
-            showErrorDialog("Error", "Failed to reload card");
+            success = false;
         }
+        return success;
     }
 
     // Función para mostrar mensaje de error

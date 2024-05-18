@@ -20,7 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PaymentCardController implements Initializable {
-    int total = 0, change = 0, cash = 0, id , amount = 0;
+    int total = 0, change = 0, cash = 0 , amount = 0;
+    String id;
     //usan logica para pago que diferencia el tipo de transaccion
     boolean createCard = false, rechargeCard = false ;
 
@@ -34,9 +35,6 @@ public class PaymentCardController implements Initializable {
         cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
     }
 
-    public void setId(int id){
-        this.id = id;
-    }
 
     public void setCreateCardBill(){
         this.createCard = true;
@@ -47,7 +45,7 @@ public class PaymentCardController implements Initializable {
     }
 
     // Métodos auxiliares para obtener inputs (debes implementarlos según tu UI)
-    public void setCardNumberInput(int setCardNumber) {
+    public void setCardNumberInput(String setCardNumber) {
         this.id = setCardNumber;
     }
 
@@ -122,17 +120,19 @@ public class PaymentCardController implements Initializable {
         if (createCard) {
             if (cash >= total) {
                 try {
-                    // Crear una nueva tarjeta y guardarla en la base de datos
-                    Card card = Card.createCard(String.valueOf(id), total);
-                    card.saveCardToDatabase();
+                        // Crear una nueva tarjeta y guardarla en la base de datos
+                        Card card = Card.createCard(String.valueOf(id), total);
+                        card.saveCardToDatabase();
 
 
-                    // Actualizar el balance del usuario y la interfaz gráfica
-                    User.balance += total;
-                    cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
-                    total = 0;
-                    showPaymentSuccessAlert();
-                    totalBillMenu.setVisible(false);
+                        // Actualizar el balance del usuario y la interfaz gráfica
+                        User.balance += total;
+                        cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
+                        total = 0;
+                        showPaymentSuccessAlert("Payment Successful","Payment has been successfully processed.");
+                        totalBillMenu.setVisible(false);
+
+
                 } catch (Exception e) {
                     showErrorDialog("Error", "Failed to create and charge the card: " + e.getMessage());
                 }
@@ -140,18 +140,16 @@ public class PaymentCardController implements Initializable {
                 showErrorDialog("Invalid payment", "Payment must be total, not partial.");
             }
         } else if (rechargeCard) {
-            // Implementar lógica de recargar la tarjeta
-            String cardNumber = String.valueOf(id); // Obtener el número de tarjeta de algún input de la UI
-            int toCharge = amount; // Obtener el monto de recarga de algún input de la UI
-
-            try {
-                Card.reloadCard(cardNumber, toCharge);
-
-                // Actualizar el balance del usuario y la interfaz gráfica si es necesario
-                User.balance += amount;
+            boolean success = Card.reloadCard( id, total);
+            if (success) {
+                // Actualizar el balance del usuario y la interfaz gráfica
+                User.balance += total;
                 cashOnHand.setText("Cash on hand: $ " + User.balance + " COP");
-            } catch (Exception e) {
-                showErrorDialog("Error", "Failed to reload the card: " + e.getMessage());
+                total = 0;
+                showPaymentSuccessAlert("Payment Successful","Payment has been successfully processed.");
+                totalBillMenu.setVisible(false);
+            } else {
+                showErrorDialog("Error", "La recarga de la tarjeta ha fallado.");
             }
         } else {
             showErrorDialog("Error", "Error assigning transaction type");
@@ -237,12 +235,12 @@ public class PaymentCardController implements Initializable {
         });
     }
 
-    private   void showPaymentSuccessAlert() {
+    private   void showPaymentSuccessAlert(String title, String message) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Payment Successful");
+            alert.setTitle(title);
             alert.setHeaderText(null);
-            alert.setContentText("Payment has been successfully processed.");
+            alert.setContentText(message);
 
             // Obtener el stage padre y establecerlo como propietario de la alerta esto permite
             // dar el mensaje sin que se pierda el foco y cambie de ventana
