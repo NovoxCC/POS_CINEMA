@@ -44,7 +44,7 @@ public class mainMenuController {
 
     public void OnviewSchedulesButton(ActionEvent actionEvent) throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/daySchedule.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/day-schedule.fxml"));
             Parent centerContent = loader.load();
             mainMenu.setCenter(centerContent);
         } catch (IOException e) {
@@ -57,6 +57,17 @@ public class mainMenuController {
     public void Onnewcard(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/create-card.fxml"));
+            Parent centerContent = loader.load();
+            mainMenu.setCenter(centerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejo de errores
+        }
+    }
+
+    public void Onrechargecard(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/poscinema/pos_cinema/recharge-card.fxml"));
             Parent centerContent = loader.load();
             mainMenu.setCenter(centerContent);
         } catch (IOException e) {

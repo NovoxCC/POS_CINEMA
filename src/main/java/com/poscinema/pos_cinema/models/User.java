@@ -22,10 +22,12 @@ import java.util.logging.Logger;
 public class User {
     private String username;
     private Integer roleId;
+    public static int balance;
 
     public User() {
         this.username = null;
         this.roleId = null;
+        balance = 0;
     }
 
     public String getUsername() {
@@ -42,6 +44,14 @@ public class User {
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    public  int getBalance(){
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        User.balance = balance;
     }
 
     public static boolean login(String username, String password) {

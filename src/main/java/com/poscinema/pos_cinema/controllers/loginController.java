@@ -17,6 +17,7 @@ public class loginController {
     @FXML
     private TextField passwordField;
 
+
     @FXML
     void OnsignInButton() {
         User user = new User();
@@ -43,9 +44,10 @@ public class loginController {
                     stage.setScene(scene);
 
                     // Maximizar la ventana
-                    stage.setMaximized(true);
-                    stage.setFullScreen(true);
 
+                    stage.setFullScreen(true);
+                    stage.setMaximized(true);
+                    stage.centerOnScreen();
                     stage.show();
 
                 }catch (IOException e){
