@@ -37,4 +37,4 @@ La aplicación debe permitir:
 8. Visualizar el dinero en caja.
 
 
-Para mas detalles revisar el documento 
+Para mas detalles revisar el documento [link] (https://github.com/NovoxCC/POS_CINEMA/blob/master/docs/Documentación%20del%20proyecto%20POO%20578099a85b1e4aec9a08761f2658e523.pdf)
