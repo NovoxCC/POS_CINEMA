@@ -8,6 +8,7 @@ module com.poscinema.pos_cinema {
     requires java.sql;
     requires de.mkammerer.argon2.nolibs;
     requires junit;
+    requires mysql.connector.j;
 
     opens com.poscinema.pos_cinema to javafx.fxml;
     exports com.poscinema.pos_cinema;
